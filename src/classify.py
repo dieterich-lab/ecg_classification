@@ -18,11 +18,17 @@ from utils import extract_r_peak_features, get_data_split
 from plotting import plot_corr_heatmap, plot_feature_importance
 
 
-def classify_real_synth_healthy_af(label: str, use_peaks=True):
-    assert label in ['healthy', 'af'], "Label must be either 'healthy' or 'af'"
+def classify_real_synth_healthy_af(label: str, csv_path: str, use_peaks=True):
+    """
+    Classifies real vs synthetic ECGs for a given label ('healthy' or 'af').
 
-    path = f'data/processed_data/features/real_vs_synth_separate/real_synth_{label}.csv'
-    df = pd.read_csv(path)
+    Parameters:
+        label (str): 'healthy' or 'af'
+        csv_path (str): Path to the input CSV file containing real and synthetic features
+        use_peaks (bool): Whether to include peak-based features in classification
+    """
+    assert label in ['healthy', 'af'], "Label must be either 'healthy' or 'af'"
+    df = pd.read_csv(csv_path)
 
     # Separate real and synthetic ECGs
     real = df[df['label'] == 0].dropna()
@@ -175,6 +181,11 @@ def main():
     )
 
     parser.add_argument(
+        "--csv_path", type=str,
+        help="Path to the real_vs_synth CSV file (required for 'real_vs_synth')"
+    )
+
+    parser.add_argument(
         "--use_peaks", type=bool, default=True,
         help="Whether to include peak-based features (True/False)"
     )
@@ -203,10 +214,14 @@ def main():
     args = parser.parse_args()
 
     if args.task == "real_vs_synth":
-        if args.label is None:
-            print("Label must be specified for 'real_vs_synth' task.")
+        if not args.label or not args.csv_path:
+            print("Both --label and --csv_path must be specified for the 'real_vs_synth' task.")
         else:
-            classify_real_synth_healthy_af(args.label, args.use_peaks)
+            classify_real_synth_healthy_af(
+                label=args.label,
+                csv_path=args.csv_path,
+                use_peaks=args.use_peaks
+            )
     elif args.task == "healthy_vs_af":
         classify_healthy_af(
             data=args.data,

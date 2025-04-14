@@ -26,13 +26,13 @@ pip install -r requirements.txt
 
 The script supports two main tasks: **real vs. synthetic ECG classification and healthy vs. AF classification**. 
 You can run the script from the command line with different parameters to perform these tasks.
-Example commands for both the tasks are shown below.
+Example commands for both the tasks are shown below and run them from the `src` directory.
 
 1. Real vs Synthetic Classification:
 This command will classify real vs synthetic ECG signals for the healthy label, using peak-based features.
     
 ```bash
-python classify.py --task real_vs_synth --label healthy --use_peaks True
+python classify.py --task real_vs_synth --label healthy --csv_path path/to/real_synth_healthy.csv --use_peaks True
 ```
 **Parameters:**
 * --task real_vs_synth: Specifies that the task is to classify real vs synthetic ECG signals.
