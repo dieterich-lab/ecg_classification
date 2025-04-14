@@ -1,8 +1,11 @@
 # ECG Classification
 
-This project implements classification models for distinguishing between healthy and atrial fibrillation (AF) ECG signals using real and synthetic data. The goal is to leverage different classification algorithms to classify ECGs based on extracted features.
-This is a use case for the main project here - https://github.com/dieterich-lab/ecg_data_synthesis
-The main feature extraction pipeline to get the basic ECG features for real and synthetic data is implemented here - https://github.com/dieterich-lab/ecg_processing
+-    This project implements classification models for 2 tasks.
+        1.    Discrimination of real and synthetic ECGs seprately for Healthy and AF label groups utilizing different classifiers.
+        2.    Cross-domain classification of Healthy and AF ECGs utilizing real and synthetic ECG features.
+    
+-    This is a use case for the main project here - https://github.com/dieterich-lab/ecg_data_synthesis
+-    The main feature extraction pipeline to get the basic ECG features for real and synthetic data is implemented here - https://github.com/dieterich-lab/ecg_processing
 
 ## Installation
 
